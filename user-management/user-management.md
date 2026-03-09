@@ -147,3 +147,116 @@ w
 Show login history:
 
 last
+
+11. Switch User (su vs sudo)
+Switch to another user
+su username
+
+Example:
+
+su shashi
+
+Switch to root:
+
+su -
+
+The - loads the user's full login environment.
+
+Using sudo
+
+sudo allows a permitted user to execute commands as another user (usually root).
+
+Example:
+
+sudo dnf update
+
+This is safer than logging in as root.
+
+12. Configure sudo Access
+
+To grant sudo privileges, add the user to the wheel group (RHEL-based systems).
+
+sudo usermod -aG wheel username
+
+Example:
+
+sudo usermod -aG wheel shashi
+
+Verify:
+
+groups shashi
+Editing sudoers File
+
+Use visudo to safely edit sudo permissions.
+
+sudo visudo
+
+Example entry:
+
+shashi ALL=(ALL) ALL
+
+Meaning:
+
+user shashi
+
+can run commands
+
+as any user
+
+on any host
+
+13. Password Aging
+
+Password policies can enforce password changes.
+
+View password settings:
+
+chage -l username
+
+Example:
+
+chage -l shashi
+
+Set password expiry:
+
+sudo chage -M 90 username
+
+Meaning password expires in 90 days.
+
+14. Force Password Change
+
+Force user to change password at next login:
+
+sudo chage -d 0 username
+
+Example:
+
+sudo chage -d 0 shashi
+
+15. Disable User Login Shell
+
+Sometimes service accounts should not allow login.
+
+Example:
+
+sudo usermod -s /sbin/nologin username
+
+or
+
+sudo usermod -s /bin/false username
+
+16. Check Failed Login Attempts
+
+Check authentication logs.
+
+RHEL / Rocky / Alma:
+
+sudo cat /var/log/secure
+
+Ubuntu / Debian:
+
+sudo cat /var/log/auth.log
+
+Example search:
+
+sudo grep "Failed password" /var/log/secure

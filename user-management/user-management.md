@@ -1,34 +1,40 @@
-Then delete everything and paste this:
-
 # Linux User Management
 
 User management is a fundamental system administration task. It involves creating users, assigning permissions, managing groups, and maintaining secure access to the system.
 
 ---
 
-## 1. Create a User
+## Create a User
 
-Create a new user account:
-
-```bash
 sudo useradd username
 
 Example:
 
 sudo useradd shashi
-2. Create User with Home Directory
+
+---
+
+## Create User with Home Directory
+
 sudo useradd -m username
 
 Home directory will be created in:
 
 /home/username
-3. Set User Password
+
+---
+
+## Set User Password
+
 sudo passwd username
 
 Example:
 
 sudo passwd shashi
-4. Delete a User
+
+---
+
+## Delete a User
 
 Delete user:
 
@@ -37,7 +43,10 @@ sudo userdel username
 Delete user and home directory:
 
 sudo userdel -r username
-5. Modify a User
+
+---
+
+## Modify a User
 
 Change login shell:
 
@@ -46,7 +55,10 @@ sudo usermod -s /bin/bash username
 Change home directory:
 
 sudo usermod -d /home/newdir username
-6. User Groups
+
+---
+
+## User Groups
 
 Create group:
 
@@ -59,20 +71,22 @@ sudo usermod -aG devops username
 Check user groups:
 
 groups username
-7. System Users vs Regular Users
 
-Regular users:
+---
 
-UID usually starts from 1000+
+## System Users vs Regular Users
 
-System users:
+Regular users usually have UID starting from 1000.
 
-UID usually below 1000
+System users usually have UID below 1000.
 
 View users:
 
 cat /etc/passwd
-8. Important User Files
+
+---
+
+## Important User Files
 
 User information:
 
@@ -85,7 +99,10 @@ Encrypted passwords:
 Group information:
 
 /etc/group
-9. Lock and Unlock Users
+
+---
+
+## Lock and Unlock Users
 
 Lock account:
 
@@ -94,44 +111,46 @@ sudo usermod -L username
 Unlock account:
 
 sudo usermod -U username
-10. Check Logged in Users
 
-Show logged-in users:
+---
+
+## Check Logged in Users
 
 who
 
-Show detailed login activity:
-
 w
 
-Show login history:
-
 last
-11. Switch User (su vs sudo)
 
-Switch to another user:
+---
+
+## Switch User
 
 su username
 
-Switch to root with full environment:
+Switch to root:
 
 su -
-12. Using sudo
+
+---
+
+## Using sudo
 
 Example:
 
 sudo dnf update
 
-Grant sudo privileges (RHEL-based systems):
+Grant sudo privileges:
 
 sudo usermod -aG wheel username
 
-Verify:
+Verify groups:
 
 groups username
-13. Edit sudoers Safely
 
-Always use:
+---
+
+## Edit sudoers Safely
 
 sudo visudo
 
@@ -139,19 +158,11 @@ Example entry:
 
 shashi ALL=(ALL) ALL
 
-Meaning:
+---
 
-user shashi
+## Password Aging
 
-can run commands
-
-as any user
-
-on any host
-
-14. Password Aging
-
-Check password settings:
+Check password policy:
 
 chage -l username
 
@@ -159,21 +170,25 @@ Set password expiry:
 
 sudo chage -M 90 username
 
-Force password change at next login:
+Force password change:
 
 sudo chage -d 0 username
-15. Disable Login Shell
 
-Useful for service accounts.
+---
+
+## Disable Login Shell
 
 sudo usermod -s /sbin/nologin username
 
 or
 
 sudo usermod -s /bin/false username
-16. Check Failed Login Attempts
 
-RHEL / Rocky / Alma:
+---
+
+## Check Failed Login Attempts
+
+RHEL based systems:
 
 sudo cat /var/log/secure
 

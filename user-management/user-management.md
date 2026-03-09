@@ -1,74 +1,52 @@
+Then delete everything and paste this:
+
 # Linux User Management
 
 User management is a fundamental system administration task. It involves creating users, assigning permissions, managing groups, and maintaining secure access to the system.
 
 ---
 
-# 1. Create a User
+## 1. Create a User
 
 Create a new user account:
 
+```bash
 sudo useradd username
 
 Example:
 
 sudo useradd shashi
-
----
-
-# 2. Create User with Home Directory
-
-Some systems require explicitly creating the home directory.
-
+2. Create User with Home Directory
 sudo useradd -m username
 
 Home directory will be created in:
 
 /home/username
-
----
-
-# 3. Set User Password
-
-Set or change password:
-
+3. Set User Password
 sudo passwd username
 
 Example:
 
 sudo passwd shashi
+4. Delete a User
 
----
-
-# 4. Delete a User
-
-Remove a user:
+Delete user:
 
 sudo userdel username
 
-Remove user and home directory:
+Delete user and home directory:
 
 sudo userdel -r username
+5. Modify a User
 
----
-
-# 5. Modify a User
-
-Change user properties.
-
-Example: change login shell
+Change login shell:
 
 sudo usermod -s /bin/bash username
 
-Example: change home directory
+Change home directory:
 
 sudo usermod -d /home/newdir username
-
----
-
-# 6. User Groups
-
-Groups allow multiple users to share permissions.
+6. User Groups
 
 Create group:
 
@@ -81,32 +59,20 @@ sudo usermod -aG devops username
 Check user groups:
 
 groups username
+7. System Users vs Regular Users
 
----
+Regular users:
 
-# 7. System Users vs Regular Users
+UID usually starts from 1000+
 
-Regular users
+System users:
 
-UID usually starts from:
-
-1000+
-
-System users
-
-Used for services like nginx, mysql.
-
-UID usually below:
-
-1000
+UID usually below 1000
 
 View users:
 
 cat /etc/passwd
-
----
-
-# 8. Important User Files
+8. Important User Files
 
 User information:
 
@@ -119,10 +85,7 @@ Encrypted passwords:
 Group information:
 
 /etc/group
-
----
-
-# 9. Lock and Unlock Users
+9. Lock and Unlock Users
 
 Lock account:
 
@@ -131,12 +94,9 @@ sudo usermod -L username
 Unlock account:
 
 sudo usermod -U username
+10. Check Logged in Users
 
----
-
-# 10. Check Logged in Users
-
-Show logged in users:
+Show logged-in users:
 
 who
 
@@ -147,47 +107,31 @@ w
 Show login history:
 
 last
-
 11. Switch User (su vs sudo)
-Switch to another user
+
+Switch to another user:
+
 su username
 
-Example:
-
-su shashi
-
-Switch to root:
+Switch to root with full environment:
 
 su -
-
-The - loads the user's full login environment.
-
-Using sudo
-
-sudo allows a permitted user to execute commands as another user (usually root).
+12. Using sudo
 
 Example:
 
 sudo dnf update
 
-This is safer than logging in as root.
-
-12. Configure sudo Access
-
-To grant sudo privileges, add the user to the wheel group (RHEL-based systems).
+Grant sudo privileges (RHEL-based systems):
 
 sudo usermod -aG wheel username
 
-Example:
-
-sudo usermod -aG wheel shashi
-
 Verify:
 
-groups shashi
-Editing sudoers File
+groups username
+13. Edit sudoers Safely
 
-Use visudo to safely edit sudo permissions.
+Always use:
 
 sudo visudo
 
@@ -205,49 +149,29 @@ as any user
 
 on any host
 
-13. Password Aging
+14. Password Aging
 
-Password policies can enforce password changes.
-
-View password settings:
+Check password settings:
 
 chage -l username
-
-Example:
-
-chage -l shashi
 
 Set password expiry:
 
 sudo chage -M 90 username
 
-Meaning password expires in 90 days.
-
-14. Force Password Change
-
-Force user to change password at next login:
+Force password change at next login:
 
 sudo chage -d 0 username
+15. Disable Login Shell
 
-Example:
-
-sudo chage -d 0 shashi
-
-15. Disable User Login Shell
-
-Sometimes service accounts should not allow login.
-
-Example:
+Useful for service accounts.
 
 sudo usermod -s /sbin/nologin username
 
 or
 
 sudo usermod -s /bin/false username
-
 16. Check Failed Login Attempts
-
-Check authentication logs.
 
 RHEL / Rocky / Alma:
 
@@ -257,6 +181,6 @@ Ubuntu / Debian:
 
 sudo cat /var/log/auth.log
 
-Example search:
+Search failed logins:
 
 sudo grep "Failed password" /var/log/secure

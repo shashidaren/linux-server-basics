@@ -1,49 +1,94 @@
-# linux-server-basics
-Fundamental Linux server administration concepts and practical guides.
-Linux Server Basics
+cat << 'EOF' > README.md
+# Linux Server Basics
 
 This repository documents fundamental Linux server administration concepts and practical tasks.
 
-It is intended as a learning resource and portfolio project demonstrating core Linux administration skills.
+It serves as a personal knowledge base and reference guide for common Linux administration activities.
 
-Topics Covered
+---
 
-User and group management
+# Topics Covered
 
-Package management
+This repository includes documentation for the following Linux administration areas.
 
-Service management with systemd
+- User Management
+- File Permissions
+- File ACLs
+- Process Management
+- Service Management
+- Package Management
+- Log Management
+- Cron Jobs
+- Networking Basics
+- Disk Management
+- LVM (Logical Volume Manager)
+- SSH Management
+- System Monitoring
+- Firewall Management
+- Archive & Compression
+- Linux Boot Process
 
-Log management
+---
 
-Cron jobs
+# Repository Structure
 
-Basic networking configuration
 
-Repository Structure
+linux-server-basics
+│
+├── user-management
+├── file-permissions
+├── file-acls
+├── process-management
+├── service-management
+├── package-management
+├── log-management
+├── cron-jobs
+├── networking
+├── disk-management
+├── lvm
+├── ssh
+├── system-monitoring
+├── firewall-management
+├── archive-compression
+└── linux-boot-process
 
-user-management
-Managing Linux users and groups.
 
-package-management
-Installing and managing software packages.
+---
 
-services
-Managing system services with systemd.
+# Environment
 
-logs
-Understanding and troubleshooting system logs.
+Test environments used while building these notes:
 
-cron
-Automating tasks using cron.
+- Rocky Linux
+- AlmaLinux
+- Ubuntu
 
-networking
-Basic network configuration and troubleshooting.
+---
 
-Environment
+# Purpose
 
-Test environment used in this project:
+The goal of this repository is to:
 
-Rocky Linux
+- document Linux administration knowledge
+- provide quick command references
+- maintain personal operational runbooks
+- share Linux learning resources
 
-AlmaLinux
+---
+
+# Useful For
+
+This repository can help with:
+
+- Linux administration learning
+- DevOps preparation
+- troubleshooting reference
+- interview preparation
+
+---
+
+# Author
+
+Shashi
+
+
